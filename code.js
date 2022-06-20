@@ -1,8 +1,20 @@
+const Carol = {name:"Carol", surname:"DeLucas"}
+const Emanuel = {name:"Emanuel", surname:"Asandei"}
+const Sara = {name:"Sara", surname:"DelRío"}
+const Marco = {name:"Marco", surname:"ElPoderoso"}
+
+let userBase = [Carol.name, Emanuel.name, Sara.name, Marco.name];
+
+for (algo in userBase) {
+	console.log(userBase[algo]);
+}
+
 let nameForm = document.getElementById("name-form");
 let surnameForm = document.getElementById("surname-form");
 let botónForm = document.getElementById("botón-loco");
-let contentRewriteable = document.querySelector(".information-user");
+let contentRewriteable = document.getElementById("name-texts");
 let imageContentUser = document.getElementById("image-content-user");
+
 
 botónForm.addEventListener("click", (e)=>{
 	e.preventDefault();
@@ -11,7 +23,10 @@ botónForm.addEventListener("click", (e)=>{
 	if (error[0] == true) {
 		contentRewriteable.innerHTML = error[1];
 	}else if (error2[0] == true) {
-		contentRewriteable.innerTHML = error2[1];
+			imageContentUser.style.display = "none";
+		contentRewriteable.innerHTML = error2[1];
+		console.log(nameForm.value);
+		console.log(Emanuel.name);
 	}else {
 		completeNameAndImg();
 	}
@@ -35,27 +50,38 @@ const validarCampos = ()=>{
 
 const validarUsuarios = ()=>{
 	let error2 = [];
-	if (nameForm.value != "Emanuel" || nameForm.value != "emanuel") {
-		error2[0] = true;
-		error2[1] = "Ese usuario no existe";
-		return error2;
-	}else if (surnameForm.value != "Asandei" || surnameForm.value != "asandei") {
-		error2[0] = true;
-		error2[1] = "Ese usuario no existe";
-		return error2;
-	}else {
+	if (nameForm.value == userBase[0]) {
 		error2[0] = false;
+		imageContentUser.src = `${userBase[0]}.jpg`;
+		imageContentUser.style.display = "inline";
+		surnameForm.value = Carol.surname;
 		return error2;
+	} else if (nameForm.value == userBase[1]){
+		error2[0] = false;
+		imageContentUser.src = `${userBase[1]}.jpg`;
+		imageContentUser.style.display = "inline";
+		surnameForm.value = Emanuel.surname;
+		return error2;
+	} else if (nameForm.value == userBase[2]){
+		error2[0] = false;
+		imageContentUser.src = `${userBase[2]}.jpg`;
+		imageContentUser.style.display = "inline";
+		surnameForm.value = Sara.surname;
+		return error2;
+	} else if (nameForm.value == userBase[3]){
+		error2[0] = false;
+		imageContentUser.src = `${userBase[3]}.jpg`;
+		imageContentUser.style.display = "inline";
+		surnameForm.value = Marco.surname
+		return error2;
+	} else {
+		error2[0] = true;
+		error2[1] = "Usuario inexistente";
 	}
 }
 
 function completeNameAndImg() {
 	let unificar = nameForm.value + " " + surnameForm.value;
 	document.getElementById("name-texts").innerHTML = unificar;
-	if (nameForm.value == "Emanuel" || nameForm.value == "emanuel") {
-		imageContentUser.src = "EmanuelXD.jpeg";
-		imageContentUser.style.display = "inline";
-	}
 }
-
 
