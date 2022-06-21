@@ -5,10 +5,6 @@ const Marco = {name:"Marco", surname:"ElPoderoso"}
 
 let userBase = [Carol.name, Emanuel.name, Sara.name, Marco.name];
 
-for (algo in userBase) {
-	console.log(userBase[algo]);
-}
-
 let nameForm = document.getElementById("name-form");
 let surnameForm = document.getElementById("surname-form");
 let botónForm = document.getElementById("botón-loco");
@@ -21,12 +17,14 @@ botónForm.addEventListener("click", (e)=>{
 	let error = validarCampos();
 	let error2 = validarUsuarios();
 	if (error[0] == true) {
-		contentRewriteable.innerHTML = error[1];
+		if(error2[0] = true) {
+			contentRewriteable.innerHTML = error2[1];
+		}else {
+			contentRewriteable.innerHTML = error[1];
+		}
 	}else if (error2[0] == true) {
-			imageContentUser.style.display = "none";
+		imageContentUser.style.display = "none";
 		contentRewriteable.innerHTML = error2[1];
-		console.log(nameForm.value);
-		console.log(Emanuel.name);
 	}else {
 		completeNameAndImg();
 	}
@@ -52,24 +50,28 @@ const validarUsuarios = ()=>{
 	let error2 = [];
 	if (nameForm.value == userBase[0]) {
 		error2[0] = false;
+		error2[1] = Carol.name + " " + Carol.surname;
 		imageContentUser.src = `${userBase[0]}.jpg`;
 		imageContentUser.style.display = "inline";
 		surnameForm.value = Carol.surname;
 		return error2;
 	} else if (nameForm.value == userBase[1]){
 		error2[0] = false;
+		error2[1] = Emanuel.name + " " + Emanuel.surname;
 		imageContentUser.src = `${userBase[1]}.jpg`;
 		imageContentUser.style.display = "inline";
 		surnameForm.value = Emanuel.surname;
 		return error2;
 	} else if (nameForm.value == userBase[2]){
 		error2[0] = false;
+		error2[1] = Sara.name + " " + Sara.surname;
 		imageContentUser.src = `${userBase[2]}.jpg`;
 		imageContentUser.style.display = "inline";
 		surnameForm.value = Sara.surname;
 		return error2;
 	} else if (nameForm.value == userBase[3]){
 		error2[0] = false;
+		error2[1] = Marco.name + " " + Marco.surname;
 		imageContentUser.src = `${userBase[3]}.jpg`;
 		imageContentUser.style.display = "inline";
 		surnameForm.value = Marco.surname
@@ -77,6 +79,7 @@ const validarUsuarios = ()=>{
 	} else {
 		error2[0] = true;
 		error2[1] = "Usuario inexistente";
+		return error2;
 	}
 }
 
